@@ -6,6 +6,7 @@
 package rmEjemplo;
 
 import com.mycompany.servidorinterface.servidorInterface;
+import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -17,7 +18,7 @@ import java.rmi.server.UnicastRemoteObject;
  * @author Oswaldo
  */
 public class RMIEjemplo {
-    public static void main(String[] args) throws RemoteException{
+    public static void main(String[] args) throws RemoteException, AlreadyBoundException{
         Remote remote = UnicastRemoteObject.exportObject(new servidorInterface(
                 
         
@@ -26,7 +27,7 @@ public class RMIEjemplo {
             public String holaJava(String nombre) throws RemoteException {
                 return "Hola" + nombre;
             }
-        },9001);
+        },0);
         Registry registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
         registry.bind("prueba", remote);
     }
