@@ -8,6 +8,8 @@ package rmEjemplo;
 import com.mycompany.servidorinterface.servidorInterface;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
@@ -25,6 +27,7 @@ public class RMIEjemplo {
                 return "Hola" + nombre;
             }
         },9001);
-        
+        Registry registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+        registry.bind("prueba", remote);
     }
 }
